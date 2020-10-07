@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools" package="com.pluralsight.commonintents">
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ProfileActivity">
+        </activity>
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <intent-filter>
+                <!--Means that this activity can handle send intents-->
+                <action android:name="android.intent.action.SEND"/>
+                <!--This is mandatory parameter that must be included in implicit intent-->
+                <category android:name="android.intent.category.DEFAULT"/>
+                <!--Specifies the mimeType of the send intents it can handle-->
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
+
+        <!--This provider was necessary for the camera app-->
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--This metadata just indicates that any paths is ok-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+    </application>
+
+</manifest>
